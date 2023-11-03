@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .beatbox{
+        @apply grid place-items-center w-[100px] h-[100px] bg-black text-white p-3 rounded-md  transition-all ;
+    }
+
+    .playing{
+         @apply ring-2 ring-yellow-400 scale-105;
+    }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheet.css">
+    <title>DrumKit Sound</title>
+</head>
+<body class="bg-slate-950 p-3 space-y-5">
+    <h1 class="text-3xl font-extrabold text-center text-gray-50 ">DrumKit</h1>
+    <div class="flex items-center flex-wrap justify-evenly bg-blue-950 p-8 rounded-xl gap-5">
+        
+        <div data-key="65" class="key beatbox " tabindex="1">
+            <kbd class="text-2xl">A</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="83" class="key beatbox" tabindex="2">
+            <kbd class="text-2xl">S</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="68" class="key beatbox" tabindex="3">
+            <kbd class="text-2xl">D</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="70" class="key beatbox" tabindex="4">
+            <kbd class="text-2xl">F</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="71" class="key beatbox" tabindex="5">
+            <kbd class="text-2xl">G</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="72" class="key beatbox" tabindex="6">
+            <kbd class="text-2xl">H</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="74" class="key beatbox" tabindex="7">
+            <kbd class="text-2xl">J</kbd>
+            <span>tom</span>
+        </div>
+        <div data-key="75" class="key beatbox" tabindex="8">
+            <kbd class="text-2xl">K</kbd>
+            <span>tom</span>
+        </div>
+       
+    </div>
+
+    <!--  all the audion track -->
+    <audio data-key="65" src="./cymbal-crash-7-167701.mp3"></audio>
+    <audio data-key="83" src="./mixkit-bad-joke-drums-2893.wav"></audio>
+    <audio data-key="68" src="./mixkit-bass-guitar-single-note-2331.wav"></audio>
+    <audio data-key="70" src="./mixkit-deep-horror-drum-556.wav"></audio>
+    <audio data-key="71" src="./mixkit-guitar-string-tone-2326.wav"></audio>
+    <audio data-key="72" src="./mixkit-sleigh-bells-584.wav"></audio>
+    <audio data-key="74" src="./mixkit-tribal-dry-drum-558.wav"></audio>
+    <audio data-key="75" src="./cymbal-crash-1-167695.mp3"></audio>
+
+    <script>
+        function playSound(e){
+            const audio= document.querySelector(`audio[data-key="${event.keyCode}"]`);
+            const box=document.querySelector(`.key[data-key="${event.keyCode}"]`);
+            if(!audio) return;
+            box.classList.add("playing");
+            audio.currentTime=0; // rewind to the start of the track
+            audio.play();
+        }
+        
+        // select all the box and remove playing class when transition end
+        
+        function removeTransition(e){
+            if(e.propertyName !=="transform") return ;
+            this.classList.remove("playing");
+        }
+        
+        window.addEventListener("keydown",playSound);
+        
+        const boxes =document.querySelectorAll(".key");
+        boxes.forEach(box=>{
+            box.addEventListener("transitionend",removeTransition);
+        })
+
+    </script>
+</body>
+</html>
